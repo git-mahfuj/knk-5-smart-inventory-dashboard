@@ -1,3 +1,5 @@
+"use client"
+
 export const ProductsList = () => {
   return (
     <div className="text-black">
