@@ -5,15 +5,15 @@ import { makeAutoObservable } from "mobx";
 interface Products {
   id: number;
   name: string;
-  price: number;
-  quantity: number;
+  price: string;
+  quantity: string;
 }
 
 const addProducts = (
   products: Products[],
   name: string,
-  price: number,
-  quantity: number,
+  price: string,
+  quantity: string,
 ): Products[] => {
   return [
     ...products,
@@ -33,8 +33,8 @@ const removeProducts = (products: Products[], id: number): Products[] => {
 class ProductStore {
   products: Products[] = [];
   name: string = "";
-  price: number = 10;
-  quantity: number = 10;
+  price: string = "";
+  quantity: string = "";
 
   constructor() {
     makeAutoObservable(this);
