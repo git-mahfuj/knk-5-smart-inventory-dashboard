@@ -2,18 +2,18 @@
 
 import { makeAutoObservable } from "mobx";
 
-interface Products {
+export interface Products {
   id: number;
   name: string;
-  price: string;
-  quantity: string;
+  price: number;
+  quantity: number;
 }
 
 const addProducts = (
   products: Products[],
   name: string,
-  price: string,
-  quantity: string,
+  price: number,
+  quantity: number,
 ): Products[] => {
   return [
     ...products,
@@ -30,27 +30,64 @@ const removeProducts = (products: Products[], id: number): Products[] => {
   return products.filter((product) => product.id !== id);
 };
 
+const updateProducts = (
+  products: Products[],
+  id: number,
+  name: string,
+  price: number,
+  quantity: number,
+) => {
+  return products.map((product) =>
+    product.id === id
+      ? {
+          ...product,
+          name,
+          price,
+          quantity,
+        }
+      : product,
+  );
+};
+
 class ProductStore {
   products: Products[] = [];
   name: string = "";
-  price: string = "";
-  quantity: string = "";
+  price: number = 0;
+  quantity: number = 0;
+  lowStockMsg: string = "low in stock";
 
   constructor() {
     makeAutoObservable(this);
   }
 
-  addProduct(): Products[] {
-    return (this.products = addProducts(
+  addProduct(): void {
+    if (!this.name.trim() || this.price <= 0 || this.quantity <= 0) return;
+    this.products = addProducts(
       this.products,
       this.name,
       this.price,
       this.quantity,
-    ));
+    );
+    this.name = "";
+    this.price = 0;
+    this.quantity = 0;
   }
 
   removeProduct(id: number): Products[] {
     return (this.products = removeProducts(this.products, id));
+  }
+  updateProduct(id: number): void {
+    if (!this.name.trim() || this.price <= 0 || this.quantity <= 0) return;
+    this.products = updateProducts(
+      this.products,
+      id,
+      this.name,
+      this.price,
+      this.quantity,
+    );
+    this.name = "";
+    this.price = 0;
+    this.quantity = 0;
   }
 }
 

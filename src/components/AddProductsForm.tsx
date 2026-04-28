@@ -4,19 +4,12 @@ import { observer } from "mobx-react";
 const AddProductsForm = () => {
   const handleFormChange = (e: any): void => {
     e.preventDefault();
-    const productsClear = (): string => {
-      return (
-        (productsStore.name = ""),
-        (productsStore.quantity = ""),
-        (productsStore.price = "")
-      );
-    };
-    productsClear();
+    localStorage.setItem("store_products", JSON.stringify(productsStore.products));
   };
   console.log(productsStore.products);
   return (
     <div className="text-black">
-      <p className="text-2xl">Add Products Form</p>
+      <p className="text-2xl text-white">Add Products Form</p>
       <form
         onSubmit={handleFormChange}
         className="flex flex-col justify-center items-center mt-4"
@@ -33,7 +26,7 @@ const AddProductsForm = () => {
           className="bg-white p-2 rounded-xl w-70 placeholder:text-gray-600"
           placeholder="ex:price"
           value={productsStore.price}
-          onChange={(e) => (productsStore.price = e.target.value.trim())}
+          onChange={(e) => (productsStore.price = e.target.value)}
         />
         <label htmlFor="">Quantity</label>
         <input
