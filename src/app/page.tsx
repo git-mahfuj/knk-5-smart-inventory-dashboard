@@ -1,7 +1,6 @@
 "use client";
 import { AddProductsObserver } from "@/components/AddProductsForm";
 import { ProductsListObserver } from "@/components/ProductsList";
-import { UpdateProducts } from "@/components/UpdateProducts";
 import Image from "next/image";
 
 export default function Home() {
