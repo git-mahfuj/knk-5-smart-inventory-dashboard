@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 import { Products, productsStore } from "@/store/store";
 import { observer } from "mobx-react";
@@ -91,7 +92,7 @@ const ProductsList = () => {
                           placeholder="ex:price"
                           value={productsStore.price}
                           onChange={(e) =>
-                            (productsStore.price = e.target.value.trim())
+                            (productsStore.price = Number(e.target.value))
                           }
                         />
                       </div>
@@ -104,7 +105,7 @@ const ProductsList = () => {
                           placeholder="ex:quantity"
                           value={productsStore.quantity}
                           onChange={(e) =>
-                            (productsStore.quantity = e.target.value.trim())
+                            (productsStore.price = Number(e.target.value))
                           }
                         />
                       </div>
