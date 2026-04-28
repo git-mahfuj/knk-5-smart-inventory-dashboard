@@ -26,14 +26,14 @@ const AddProductsForm = () => {
           className="bg-white p-2 rounded-xl w-70 placeholder:text-gray-600"
           placeholder="ex:price"
           value={productsStore.price}
-          onChange={(e) => (productsStore.price = e.target.value)}
+          onChange={(e) => (productsStore.price = Number(e.target.value))}
         />
         <label htmlFor="">Quantity</label>
         <input
           className="bg-white p-2 rounded-xl w-70 placeholder:text-gray-600"
           placeholder="ex:quantity"
           value={productsStore.quantity}
-          onChange={(e) => (productsStore.quantity = e.target.value.trim())}
+          onChange={(e) => (productsStore.quantity = Number(e.target.value))}
         />
         <button
           className="mt-3 bg-white w-fit  py-2 text-black rounded-lg px-6"

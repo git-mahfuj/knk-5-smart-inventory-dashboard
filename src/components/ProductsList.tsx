@@ -72,7 +72,7 @@ const ProductsList = () => {
                     <div className="flex flex-col justify-center items-center gap-6">
                       <div>
                         <label htmlFor="" className="text-white">
-                          Add Products
+                          Update Products
                         </label>
                         <input
                           className="bg-white p-2 rounded-xl w-70 placeholder:text-gray-600"
@@ -105,7 +105,7 @@ const ProductsList = () => {
                           placeholder="ex:quantity"
                           value={productsStore.quantity}
                           onChange={(e) =>
-                            (productsStore.price = Number(e.target.value))
+                            (productsStore.quantity = Number(e.target.value))
                           }
                         />
                       </div>
