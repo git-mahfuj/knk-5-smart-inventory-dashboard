@@ -3,18 +3,16 @@
 import { Products, productsStore } from "@/store/store";
 import { observer } from "mobx-react";
 import { useEffect, useState } from "react";
-const ProductsList = () => {
-  
+export const ProductsList = observer(() => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
   useEffect(() => {
-    const savedData = localStorage.getItem("store_products");
+    const savedData = localStorage.getItem("set-products");
     if (savedData) {
       try {
-        const parsedData = JSON.parse(savedData);
-        productsStore.products = parsedData;
-      } catch (error: any) {
-        window.alert("failed to load products from productsData");
-        return;
+        productsStore.products = JSON.parse(savedData);
+      } catch (error) {
+        console.error("Failed to parse local storage data", error);
       }
     }
   }, []);
@@ -140,6 +138,4 @@ const ProductsList = () => {
       </div>
     </div>
   );
-};
-
-export const ProductsListObserver = observer(ProductsList);
+});
