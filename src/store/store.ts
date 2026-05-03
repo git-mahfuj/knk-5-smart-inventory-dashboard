@@ -1,6 +1,6 @@
 "use client";
 
-import { makeAutoObservable } from "mobx";
+import { action, makeAutoObservable, observable, reaction } from "mobx";
 
 export interface Products {
   id: number;
@@ -36,7 +36,7 @@ const updateProducts = (
   name: string,
   price: number,
   quantity: number,
-) => {
+) : Products[] => {
   return products.map((product) =>
     product.id === id
       ? {
@@ -49,15 +49,32 @@ const updateProducts = (
   );
 };
 
-class ProductStore {
+class ProductStore implements Products {
   products: Products[] = [];
+  id: number = 0;
   name: string = "";
   price: number = 0;
   quantity: number = 0;
   lowStockMsg: string = "low in stock";
 
   constructor() {
-    makeAutoObservable(this);
+    makeAutoObservable(this , {
+      id:observable,
+      name:observable,
+      price:observable,
+      quantity:observable,
+      lowStockMsg:observable,
+      addProduct:action,
+      removeProduct:action,
+      updateProduct:action
+    });
+    reaction(
+      () => this.products,
+      (products) => {
+        localStorage.setItem("set-products", JSON.stringify(products));
+        console.log("ProductsSaved" , products)
+      },
+    );
   }
 
   addProduct(): void {

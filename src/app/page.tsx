@@ -1,6 +1,8 @@
 "use client";
-import { AddProductsObserver } from "@/components/AddProductsForm";
-import { ProductsListObserver } from "@/components/ProductsList";
+import {
+  AddProductsForm,
+} from "@/components/AddProductsForm";
+import { ProductsList } from "@/components/ProductsList";
 import Image from "next/image";
 
 export default function Home() {
@@ -9,8 +11,8 @@ export default function Home() {
       <div className="translate-y-10 w-full text-center">
         <h1 className="text-3xl">Smart Inventory Dashboard</h1>
         <div className="flex justify-around w-full gap-4 mt-10">
-          <AddProductsObserver />
-          <ProductsListObserver />
+          <AddProductsForm />
+          <ProductsList />
         </div>
       </div>
     </div>

@@ -1,10 +1,10 @@
 "use client";
 import { productsStore } from "@/store/store";
 import { observer } from "mobx-react";
-const AddProductsForm = () => {
-  const handleFormChange = (e: any): void => {
+export const AddProductsForm = observer(() => {
+  const handleFormChange = (e : React.ChangeEvent): void => {
     e.preventDefault();
-    localStorage.setItem("store_products", JSON.stringify(productsStore.products));
+    
   };
   console.log(productsStore.products);
   return (
@@ -45,6 +45,5 @@ const AddProductsForm = () => {
       </form>
     </div>
   );
-};
+});
 
-export const AddProductsObserver = observer(AddProductsForm);
